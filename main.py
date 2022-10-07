@@ -9,8 +9,10 @@
 #                                        REQUIRED PACKAGE INSTALL NOTE
 # ----------------------------------------------------------------------------------------------------------------------
 # This code will not function without the Zelle graphics package.
-# >>> pip install graphics.py
-# >>> pip install tkinter               (FOR WINDOWS)
+# 1:
+# >>> pip install graphics.py           (FOR ALL)
+# 2:
+# >>> pip install tk                    (FOR WINDOWS)
 # >>> sudo apt-get install python-tk    (FOR UBUNTU)
 # >>> sudo pacman -S tk                 (FOR ARCH)
 #
@@ -45,10 +47,8 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
     dArr = []
     # get the distance to each point and assign it to the diArray along with the index
     for l in range(numPoints):
-        currentDistance = math.sqrt(
-            ((i + winX - 200) - pointsArray[l].x) * ((i + winX - 200) - pointsArray[l].x) + ((j + winY - 200) -
-                                                                                             pointsArray[l].y) * (
-                    (j + winY - 200) - pointsArray[l].y))
+        currentDistance = math.sqrt(((i + winX - 200) - pointsArray[l].x) * ((i + winX - 200) - pointsArray[l].x) +
+                                    ((j + winY - 200) - pointsArray[l].y) * ((j + winY - 200) - pointsArray[l].y))
         dArr.append(currentDistance)
 
     # create an array that contains both the index and distance of each element
@@ -79,8 +79,8 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
         totalDistance = 0
         for l in range(k):
             totalDistance += kdcArr[l][0]
-
         weightedDistances = [0 for _ in range(k)]
+
         for l in range(k):
             if kdcArr[l][0] != 0:
                 weightedDistances[l] = 1 - (kdcArr[l][0] / totalDistance)
@@ -88,7 +88,12 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
         for l in range(k):
             weightedDistances[l] = weightedDistances[l] / (k - 1)
 
-        # create the color
+        # delinearize the weighted distances by running them through the equation:
+        # y(x) = 1 / (1 + e ^ (-1.5 * pi (2x-1)))
+        for l in range(k):
+            weightedDistances[l] = 1 / (1 + pow(math.e, (-1.5 * math.pi * (2 * weightedDistances[l] - 1))))
+
+        # make tne new color
         for l in range(k):
             weightedColor[0] += kdcArr[l][1][0] * weightedDistances[l]
             weightedColor[1] += kdcArr[l][1][1] * weightedDistances[l]
