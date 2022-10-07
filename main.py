@@ -10,6 +10,9 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # This code will not function without the Zelle graphics package.
 # >>> pip install graphics.py
+# >>> pip install tkinter               (FOR WINDOWS)
+# >>> sudo apt-get install python-tk    (FOR UBUNTU)
+# >>> sudo pacman -S tk                 (FOR ARCH)
 #
 
 
