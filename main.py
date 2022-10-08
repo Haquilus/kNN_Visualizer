@@ -13,7 +13,7 @@
 # >>> pip install graphics.py           (FOR ALL)
 # 2:
 # >>> pip install tk                    (FOR WINDOWS)
-# >>> sudo apt-get install python-tk    (FOR UBUNTU)
+# >>> sudo apt-get install python-tk    (FOR UBUNTU AND MAC)
 # >>> sudo pacman -S tk                 (FOR ARCH)
 #
 
