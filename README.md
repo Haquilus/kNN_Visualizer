@@ -3,13 +3,16 @@
 #----------------------------------------------------------------------------------------------------------------------#
 
 How to use:
-Run kNN Visualizer.exe, then enter the number of points and nearest neighbors you want the program to use.
-If you have python installed, you can also run main.py.
+Option 1
+First, (if not already done) install python. Then, open the installation directory in a terminal, and install the 
+required libraries as per the note in main.py. Finally, run main.py
+
+Option 2
+Run kNN Visualizer.exe, then enter the number of points and nearest neighbors you want the program to use. Currently,
+however, kNN Visualizer.exe is out of date. This method is not recommended.
 
 How to import your own points:
+Install the prerequisites to run the code.
 In objects.py, you can create a new array of points and their colors, then import it to main and set it equal to 
-pointsArray. 
-
-If you have more points than 9, delete the error check that stops you from running the code if you have more than 9 
-points. The check only exists to prevent people from causing an index out of bounds error in the colors array when 
-randomly generating points.
+pointsArray.
+Finally, run the program.
