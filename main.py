@@ -85,7 +85,7 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
         totalDistance = 0
         for l in range(k):
             totalDistance += kdcArr[l][0]
-        weightArr = [0 for _ in range(k)]
+        weightArr = [0.0 for _ in range(k)]
         for l in range(k):
             if kdcArr[l][0] != 0:
                 weightArr[l] = 1 - (kdcArr[l][0] / totalDistance)
