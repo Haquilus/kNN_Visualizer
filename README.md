@@ -7,36 +7,36 @@ number of nearst points (or nearest neighbours) to be taken into account when cr
 
 ## Installation
 
-This program will not function without the Zelle graphics package, which itself requires tKinter
+This program will not function without the Zelle graphics package, which itself requires tKinter.
 
 For Windows:
 ```bash
-	git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
-    cd kNN_Visualizer
-	pip install graphics.py 
-	pip install tk
+  git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
+  cd kNN_Visualizer
+  pip install graphics.py 
+  pip install tk
 ```
 
 For Ubuntu and Mac:
 ```bash
-	git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
-    cd kNN_Visualizer
-	pip install graphics.py
-	sudo apt-get install python-tk
+  git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
+  cd kNN_Visualizer
+  pip install graphics.py
+  sudo apt-get install python-tk
 ```
 
 For Arch
 ```bash
-	git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
-    cd kNN_Visualizer
-	pip install graphics.py
-	sudo pacman -S tk
+  git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
+  cd kNN_Visualizer
+  pip install graphics.py
+  sudo pacman -S tk
 ```
 ## Running the Program
 
 For all operasting systems:
 ```bash
-    python main.py
+  python main.py
 ```
 Make sure you are inside the project dirctory, i.e. the kNN_Visualizer folder.
 ## Optimizations
