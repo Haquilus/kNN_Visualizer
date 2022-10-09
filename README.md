@@ -25,7 +25,7 @@ For Ubuntu and Mac:
   sudo apt-get install python-tk
 ```
 
-For Arch
+For Arch:
 ```bash
   git clone https://github.com/Haquilus/kNN_Visualizer.git kNN_Visualizer
   cd kNN_Visualizer
