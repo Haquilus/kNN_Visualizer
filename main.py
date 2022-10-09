@@ -1,37 +1,10 @@
-# ----------------------------------------------------------------------------------------------------------------------
-#                                                   BRIEF
-# ----------------------------------------------------------------------------------------------------------------------
-# This project creates an image of various points, with each pixel colored according to that pixel's distance to the
-# nearest couple of points and their respective colors. The user can specify the number of total points as well as the
-# number of nearst points (or nearest neighbours) to be taken into account when creating the color of the pixel
-#
-# ----------------------------------------------------------------------------------------------------------------------
-#                                        REQUIRED PACKAGE INSTALL NOTE
-# ----------------------------------------------------------------------------------------------------------------------
-# This code will not function without the Zelle graphics package, which itself requires tKinter
-# 1:
-# >>> pip install graphics.py           (FOR ALL)
-# 2:
-# >>> pip install tk                    (FOR WINDOWS)
-# >>> sudo apt-get install python-tk    (FOR UBUNTU AND MAC)
-# >>> sudo pacman -S tk                 (FOR ARCH)
-#
-
-
 from graphics import *
 import random
 import math
 import objects
 
 
-def determine_least(x, y, z):
-    if x < y:
-        return x
-    if y < z:
-        return y
-    return z
-
-
+# the algorythm used to generate random points
 def generate_points(numPoints, winX, winY):
     pointsArray = []
     for i in range(numPoints):
@@ -40,8 +13,8 @@ def generate_points(numPoints, winX, winY):
     return pointsArray
 
 
+# the kNN algorythm
 def find_color(i, j, winX, winY, numPoints, k, pointsArray):
-
     # note on winX and winY: used to reconstruct inspect
     # noe on inspect: starts at the top left of the work area then goes down before it goes across from left to right
     # note on notation: d = distance, c = color, so dcArr means an array with distances and color
@@ -92,8 +65,10 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
         for l in range(k):
             weightArr[l] = weightArr[l] / (k - 1)
 
-        # delinearize the weights by running them through the equation:
-        # y(x) = 1 / (1 + e ^ (-k * (4x-2)))
+        # TODO: the values coming up in weightArr are way to low to delinearize when k is large. Something has to be
+        #       done about this
+        # delinearize the weights
+        # y(x) = 1 / (1 + e ^ (-k (4x-2)))
         for l in range(k):
             weightArr[l] = 1 / (1 + pow(math.e, (-1 * k * (4 * weightArr[l] - 2))))
 
@@ -103,6 +78,36 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
             weightedColor[1] += kdcArr[l][1][1] * weightArr[l]
             weightedColor[2] += kdcArr[l][1][2] * weightArr[l]
 
+        # brighten up the picture if k > 2
+        if k > 2:
+        #    for l in range(2):
+        #        weightedColor[l] *= 0.25 * k * k + 1
+            # Scaling the color if it would produce an error
+            if weightedColor[0] > 256:
+                subpixelFactor = 256 / weightedColor[0]
+                for l in range(2):
+                    weightedColor[l] *= subpixelFactor
+                    if weightedColor[l] == 256.0:
+                        weightedColor[l] -= 1
+                    if weightedColor[l] < 1:
+                        weightedColor[l] = 1
+            if weightedColor[1] > 256:
+                subpixelFactor = 256 / weightedColor[1]
+                for l in range(2):
+                    weightedColor[l] *= subpixelFactor
+                    if weightedColor[l] == 256.0:
+                        weightedColor[l] -= 1
+                    if weightedColor[l] < 1:
+                        weightedColor[l] = 1
+            if weightedColor[2] > 256:
+                subpixelFactor = 256 / weightedColor[2]
+                for l in range(2):
+                    weightedColor[l] *= subpixelFactor
+                    if weightedColor[l] == 256.0:
+                        weightedColor[l] -= 1
+                    if weightedColor[l] < 1:
+                        weightedColor[l] = 1
+
     # set the color to that of the nearest neighbour if k = 1
     else:
         weightedColor = [kdcArr[0][1][0], kdcArr[0][1][1], kdcArr[0][1][2]]
@@ -111,7 +116,6 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
 
 
 def main():
-
     # initialization from of values
     pInput = input("Enter the number of points to be randomly generated: ")
     numPoints = int(pInput)
