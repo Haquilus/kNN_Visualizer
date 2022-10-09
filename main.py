@@ -66,7 +66,9 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
             weightArr[l] = weightArr[l] / (k - 1)
 
         # TODO: the values coming up in weightArr are way to low to delinearize when k is large. Something has to be
-        #       done about this
+        #       done about this! Hopefully, whatever is done about this will also eliminate the need to brighten the
+        #       picture after the weights are calculated. As of now, k = 1, 2, and 3 all work well but not much more.
+
         # delinearize the weights
         # y(x) = 1 / (1 + e ^ (-k (4x-2)))
         for l in range(k):
@@ -80,13 +82,14 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
 
         # brighten up the picture if k > 2
         if k > 2:
-        #    for l in range(2):
-        #        weightedColor[l] *= 0.25 * k * k + 1
+            for l in range(2):
+                weightedColor[l] *= 0.25 * k * k + 1
             # Scaling the color if it would produce an error
             if weightedColor[0] > 256:
                 subpixelFactor = 256 / weightedColor[0]
                 for l in range(2):
                     weightedColor[l] *= subpixelFactor
+                for l in range(2):
                     if weightedColor[l] == 256.0:
                         weightedColor[l] -= 1
                     if weightedColor[l] < 1:
@@ -95,6 +98,7 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
                 subpixelFactor = 256 / weightedColor[1]
                 for l in range(2):
                     weightedColor[l] *= subpixelFactor
+                for l in range(2):
                     if weightedColor[l] == 256.0:
                         weightedColor[l] -= 1
                     if weightedColor[l] < 1:
@@ -103,6 +107,7 @@ def find_color(i, j, winX, winY, numPoints, k, pointsArray):
                 subpixelFactor = 256 / weightedColor[2]
                 for l in range(2):
                     weightedColor[l] *= subpixelFactor
+                for l in range(2):
                     if weightedColor[l] == 256.0:
                         weightedColor[l] -= 1
                     if weightedColor[l] < 1:
