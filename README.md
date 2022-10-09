@@ -19,9 +19,9 @@ In objects.py, you can create a new array of points and their colors, then impor
 pointsArray.
 Finally, run the program.
 
-#----------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------------------------------------------------------#
 														Brief
-#----------------------------------------------------------------------------------------------------------------------#
+#----------------------------------------------------------------------------------------------------------------------------#
 
 This project creates an image of various points, with each pixel colored according to that pixel's distance to the
 nearest couple of points and their respective colors. The user can specify the number of total points as well as the
@@ -31,9 +31,9 @@ I apologise in advance for the render time. I tried forcing it to run on the gpu
 work well with jit. Creating my own graphics environment is, at the time of making, both out of scope for the project 
 and my skill level in python. I invite you to try and make the program run a little faster yourself.
 
-#----------------------------------------------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------------------------------------#
 										Required Packages and Installation
-#----------------------------------------------------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------------------------------------#
 
 This code will not function without the Zelle graphics package, which itself requires tKinter
 
