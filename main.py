@@ -128,6 +128,11 @@ def main():
     kInput = input("Enter the number of nearest neighbours you would like to account for (k): ")
     k = int(kInput)
 
+    # making sure the program doesnt error
+    if k >= numPoints:
+        print("Sorry k can not be greater than the number or points! ")
+        sys.exit()
+
     # initialization of the window
     win = GraphWin('kNN Example', 500, 500)
     winX = win.getWidth() / 2
